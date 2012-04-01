@@ -36,7 +36,7 @@ class ImageController extends ContainerAware
 
         if (count($errors) == 0) {
             $webUploadDir = '/uploads/ckeditor';
-            $absoluteUploadDir = '/var/www/widop/divosea.local/web'.$webUploadDir;
+            $absoluteUploadDir = $this->container->get('kernel')->getRootDir().'/../web'.$webUploadDir;
 
             $pictureName = uniqid('', true) . '.' . $uploadedFile->guessExtension();
             $uploadedFile->move($absoluteUploadDir, $pictureName);
