@@ -21,9 +21,10 @@ class CKEditorType extends AbstractType
     {
         $builder
             ->setAttribute('toolbar', $options['toolbar'])
-            ->setAttribute('ui_color', $options['ui_color']);
+            ->setAttribute('ui_color', $options['ui_color'])
+            ->setAttribute('allow_upload', $options['allow_upload']);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -31,9 +32,10 @@ class CKEditorType extends AbstractType
     {
         $view
             ->set('toolbar', $form->getAttribute('toolbar'))
-            ->set('ui_color', $form->getAttribute('ui_color'));
+            ->set('ui_color', $form->getAttribute('ui_color'))
+            ->set('allow_upload', $form->getAttribute('allow_upload'));
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -89,10 +91,11 @@ class CKEditorType extends AbstractType
                     'items' => array('Maximize', 'ShowBlocks','-','About')
                 )
             ),
+            'allow_upload' => false,
             'ui_color' => null
         );
     }
-    
+
     /**
      * Returns the allowed option values for each option (if any).
      *
@@ -102,9 +105,12 @@ class CKEditorType extends AbstractType
      */
     public function getAllowedOptionValues(array $options)
     {
-        return array('required' => array(false));
+        return array(
+            'required' => array(false),
+            'allow_upload' => array(true, false)
+        );
     }
-    
+
     /**
      * {@inheritdoc}
      */

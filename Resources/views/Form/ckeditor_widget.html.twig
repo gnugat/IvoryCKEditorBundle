@@ -11,7 +11,7 @@
     </script>
 
     <script type="text/javascript" src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}"></script>
-    
+
     <script type="text/javascript">
         {% autoescape true js %}
             var instance = CKEDITOR.instances['{{ id }}'];
@@ -23,6 +23,9 @@
                 toolbar: {{ toolbar | json_encode | raw }},
                 {% if ui_color is not null %}
                     uiColor: {{ ui_color }},
+                {% endif %}
+                {% if allow_upload %}
+                    filebrowserUploadUrl : '{{ url('ivory_ckeditor_image_upload') }}',
                 {% endif %}
             });
         {% endautoescape %}
