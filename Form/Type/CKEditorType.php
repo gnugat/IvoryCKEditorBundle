@@ -103,7 +103,7 @@ class CKEditorType extends AbstractType
      *
      * @return array The allowed option values
      */
-    public function getAllowedOptionValues(array $options)
+    public function getAllowedOptionValues()
     {
         return array(
             'required' => array(false),
