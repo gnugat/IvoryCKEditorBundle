@@ -32,9 +32,9 @@ class CKEditorType extends AbstractType
     public function buildView(FormViewInterface $view, FormInterface $form, array $options)
     {
         $view
-            ->set('toolbar', $form->getAttribute('toolbar'))
-            ->set('ui_color', $form->getAttribute('ui_color'))
-            ->set('allow_upload', $form->getAttribute('allow_upload'));
+            ->setVar('toolbar', $form->getAttribute('toolbar'))
+            ->setVar('ui_color', $form->getAttribute('ui_color'))
+            ->setVar('allow_upload', $form->getAttribute('allow_upload'));
     }
 
     /**
