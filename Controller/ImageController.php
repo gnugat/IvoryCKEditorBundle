@@ -28,29 +28,19 @@ class ImageController extends ContainerAware
 
         /* @var $uploadedFile \Symfony\Component\HttpFoundation\File\UploadedFile */
         $uploadedFile = $request->files->get('upload');
-        $imageConstraint = new Image();
 
-        /* @var $validator \Symfony\Component\Validator\Validator */
-        $validator = $this->container->get('validator');
-        $errors = $validator->validateValue($uploadedFile, $imageConstraint);
+        $webUploadDir = '/uploads/ckeditor';
+        $absoluteUploadDir = $this->container->get('kernel')->getRootDir().'/../web'.$webUploadDir;
 
-        if (count($errors) == 0) {
-            $webUploadDir = '/uploads/ckeditor';
-            $absoluteUploadDir = $this->container->get('kernel')->getRootDir().'/../web'.$webUploadDir;
+        $pictureName = uniqid('', true) . '.' . $uploadedFile->guessExtension();
+        $uploadedFile->move($absoluteUploadDir, $pictureName);
 
-            $pictureName = uniqid('', true) . '.' . $uploadedFile->guessExtension();
-            $uploadedFile->move($absoluteUploadDir, $pictureName);
-
-            $link = $webUploadDir . '/' . $pictureName;
-        } else {
-            $link = null;
-        }
+        $link = $webUploadDir . '/' . $pictureName;
 
         /* @var $templating \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine */
         $templating = $this->container->get('templating');
 
         return $templating->renderResponse('IvoryCKEditorBundle:Image:upload.html.twig', array(
-            'errors' => $errors,
             'link' => $link
         ));
     }

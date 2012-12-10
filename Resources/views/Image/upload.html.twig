@@ -1,16 +1,5 @@
 {% extends 'IvoryCKEditorBundle::layout.html.twig' %}
 
 {% block body %}
-    {% if errors is not empty %}
-        <ul>
-            {% for error in errors %}
-                <li>{{ error.message | trans }}</li>
-            {% endfor %}
-        </ul>
-        <form action="{{ url('ivory_ckeditor_image_upload') }}" method="POST" enctype="multipart/form-data">
-            <input type="file" name="upload" />
-        </form>
-    {% else %}
-        <p style="margin:0px;font-size:12px;">{{ 'ivory_ckeditor.link' | trans({}, 'IvoryCKEditor') }} {{ link }}</p>
-    {% endif %}
+    <p style="margin:0px;font-size:12px;">{{ 'ivory_ckeditor.link' | trans({}, 'IvoryCKEditor') }} {{ link }}</p>
 {% endblock body %}
