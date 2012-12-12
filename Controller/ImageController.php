@@ -32,7 +32,7 @@ class ImageController extends ContainerAware
         $webUploadDir = '/uploads/ckeditor';
         $absoluteUploadDir = $this->container->get('kernel')->getRootDir().'/../web'.$webUploadDir;
 
-        $pictureName = uniqid('', true) . '.' . $uploadedFile->guessExtension();
+        $pictureName = $uploadedFile->getClientOriginalName().'.'.$uploadedFile->guessExtension();
         $uploadedFile->move($absoluteUploadDir, $pictureName);
 
         $link = $webUploadDir . '/' . $pictureName;
